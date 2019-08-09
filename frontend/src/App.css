@@ -1,0 +1,22 @@
+* {
+  font-family: 'Inter', sans-serif !important;
+}
+
+.navbar-brand {
+  font-weight: bold;
+}
+
+code {
+  font-family: monospace !important;
+  font-size: 15px;
+}
+
+html, :not(.navbar) > div {
+  background-color: #e9ecef;
+}
+
+.card :not(button){
+  background-color: #f7f7f7 !important;
+  text-align: center;
+  cursor: pointer;
+}
