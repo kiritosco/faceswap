@@ -1,8 +1,8 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {photoChooseType, reducerActions} from "../common/consts";
 import Webcam from "react-webcam";
 import Button from "react-bootstrap/Button";
-import {PhotoTypeDispatchCtx} from "../common/state";
+import {PhotoStateDispatchCtx, PhotoTypeDispatchCtx} from "../common/state";
 import {ActionCard} from "./Buttons";
 import {SplitColLayout} from "./Layout";
 import {isMobile} from "react-device-detect";
@@ -60,22 +60,35 @@ const WebcamCapturer = ({title}) => {
         webcamRef = webcam;
     };
 
-    const takePicture = () => {
-        console.log(webcamRef.getScreenshot())
+    const takePhoto = (dispatch) => {
+        dispatch({
+            type: reducerActions.changePhoto,
+            [reducerActions.newPhoto]: webcamRef.getScreenshot()
+        })
     };
 
-    const webcamCapture  = <Webcam ref={setWebcamRef} screenshotFormat="image/jpeg" />;
-    const captureButton = <Button bsStyle={'primary'} onClick={takePicture}>Take photo</Button>;
-    const captureContainer = <div>{[webcamCapture, captureButton]}</div>;
-
-    return [
-        title,
-        captureContainer
-    ];
+    return (
+        <>
+            {title}
+            <PhotoStateDispatchCtx.Consumer>
+                {({photoStateDispatch, photoState}) => (
+                    <>
+                        {photoState ? <img src={photoState} /> :
+                            <>
+                                <Webcam ref={setWebcamRef} screenshotFormat="image/jpeg" />
+                                <Button bsStyle={'primary'} onClick={takePhoto.bind(this, photoStateDispatch)}>Take photo</Button>
+                            </>
+                        }
+                    </>
+                )}
+            </PhotoStateDispatchCtx.Consumer>
+        </>
+    )
 };
 
 const PhotoUploader = ({title}) => {
-    const photoUploadButton = <input type="file" accept="image/*" />;
+    let webcamRef = React.createRef();
+    const photoUploadButton = <input type="file" accept="image/*" ref={webcamRef} onChange={getPhoto}/>;
 
     return [
         title,

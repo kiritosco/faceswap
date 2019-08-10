@@ -1,28 +1,16 @@
-import React, {createContext} from 'react';
-import {contextKeys, photoChooseType, reducerActions} from "./consts";
+import React from 'react';
+import {photoChooseType, reducerActions} from "./consts";
 
 export const PhotoTypeDispatchCtx = React.createContext(null);
 export const PhotoStateDispatchCtx = React.createContext(null);
 
-export const basePhotosState = {
-    [contextKeys.photoOne]: null,
-    [contextKeys.photoTwo]: null
-};
-
+export const basePhotosState = null;
 export const basePhotoTypeState = photoChooseType.none;
 
 export const photoStateReducer = (state, action) => {
     switch (action.type) {
-        case reducerActions.changePhotoOne:
-            return {
-                ...state,
-                [contextKeys.photoOne]: action[reducerActions.newPhotoOne]
-            };
-        case reducerActions.changePhotoTwo:
-            return {
-                ...state,
-                [contextKeys.photoTwo]: action[reducerActions.newPhotoTwo]
-            };
+        case reducerActions.changePhoto:
+            return action[reducerActions.newPhoto];
         default:
             return state;
     }

@@ -27,15 +27,8 @@ export const photoChooseType = {
 };
 
 export const reducerActions = {
-    changePhotoOne: 'photoOne',
-    newPhotoOne: 'newPhotoOne',
-    changePhotoTwo: 'photoTwo',
-    newPhotoTwo: 'newPhotoTwo',
+    changePhoto: 'photo',
+    newPhoto: 'newPhoto',
     changePhotoType: 'photoType',
     newPhotoType: 'newPhotoType',
-};
-
-export const contextKeys = {
-    photoOne: 'photoOne',
-    photoTwo: 'photoTwo'
 };
