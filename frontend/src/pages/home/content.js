@@ -10,7 +10,7 @@ const SwapLinkButton = () => {
 export const homeContent = [
     (
         <h2 style={{display: 'flex', justifyContent: 'center'}}>
-            Welcome to faceswap 👋
+            Welcome to faceswap <span role="img" aria-label="wave">👋</span>
         </h2>
     ),
     (

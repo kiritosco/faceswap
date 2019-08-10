@@ -23,7 +23,7 @@ export const PhotoChooser = ({title}) => {
                 itemToShow = <PhotoUploader/>;
                 break;
             default:
-                throw `invalid photo choose type ${photoType}`
+                throw new Error(`invalid photo choose type ${photoType}`)
         }
 
         return (
@@ -79,7 +79,7 @@ const WebcamCapturer = () => {
         <PhotoCtx.Consumer>
             {({dispatch, state}) => (
                 <>
-                    {state && state.content ? <img src={state.content} /> :
+                    {state && state.content ? <img alt='Taken photo' src={state.content} /> :
                         <>
                             <Webcam audio={false} ref={setWebcamRef} screenshotFormat="image/jpeg" />
                             <Button bsStyle={'primary'} onClick={takePhoto.bind(this, dispatch)}>Take photo</Button>
@@ -111,7 +111,7 @@ const PhotoUploader = () => {
         <PhotoCtx.Consumer>
             {({dispatch, state}) => (
                 <>
-                    {state && state.content ? <img src={state.content} /> :
+                    {state && state.content ? <img alt='Chosen photo' src={state.content} /> :
                         <>
                             <input type="file" accept="image/*" ref={webcamRef} />
                             <Button bsStyle={'primary'} onClick={savePhoto.bind(this, dispatch)}>Choose photo</Button>
