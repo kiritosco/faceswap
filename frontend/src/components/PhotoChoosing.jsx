@@ -2,35 +2,46 @@ import React from 'react';
 import {photoChooseType, reducerActions} from "../common/consts";
 import Webcam from "react-webcam";
 import Button from "react-bootstrap/Button";
-import {PhotoStateDispatchCtx, PhotoTypeDispatchCtx} from "../common/state";
+import {PhotoCtx} from "../common/state";
 import {ActionCard} from "./Buttons";
 import {SplitColLayout} from "./Layout";
 import {isMobile} from "react-device-detect";
 
 export const PhotoChooser = ({title}) => {
     const ValidChooser = ({photoType}) => {
+        const titleToShow = <h3 style={{paddingBottom: 20}}>{title}</h3>;
+        let itemToShow = null;
+
         switch(photoType) {
             case photoChooseType.none:
-                return <PhotoTypeChooser title={titleBlock}/>;
+                itemToShow = <PhotoTypeChooser/>;
+                break;
             case photoChooseType.webcam:
-                return <WebcamCapturer title={titleBlock}/>;
+                itemToShow = <WebcamCapturer/>;
+                break;
             case photoChooseType.upload:
-                return <PhotoUploader title={titleBlock}/>;
+                itemToShow = <PhotoUploader/>;
+                break;
             default:
                 throw `invalid photo choose type ${photoType}`
         }
+
+        return (
+            <>
+                {titleToShow}
+                {itemToShow}
+            </>
+        )
     };
 
-    const titleBlock = <h3 style={{paddingBottom: 20}}>{title}</h3>;
-
     return (
-        <PhotoTypeDispatchCtx.Consumer>
-            {({photoType}) => <ValidChooser photoType={photoType}/>}
-        </PhotoTypeDispatchCtx.Consumer>
+        <PhotoCtx.Consumer>
+            {({state}) => <ValidChooser photoType={state.type}/>}
+        </PhotoCtx.Consumer>
     )
 };
 
-const PhotoTypeChooser = ({title}) => {
+const PhotoTypeChooser = () => {
     const setPhotoType = (dispatch, photoType) => {
         dispatch({
             type: reducerActions.changePhotoType,
@@ -39,21 +50,18 @@ const PhotoTypeChooser = ({title}) => {
     };
 
     return (
-        <>
-            {title}
-            <PhotoTypeDispatchCtx.Consumer>
-                {({photoTypeDispatch}) => (
-                    <SplitColLayout items={[
-                        <ActionCard action={setPhotoType.bind(this, photoTypeDispatch, photoChooseType.upload)} title={'Upload photo'}/>,
-                        !isMobile ? <ActionCard action={setPhotoType.bind(this, photoTypeDispatch, photoChooseType.webcam)} title={'Take photo'}/> : null
-                    ]} />
-                )}
-            </PhotoTypeDispatchCtx.Consumer>
-        </>
+        <PhotoCtx.Consumer>
+            {({dispatch}) => (
+                <SplitColLayout items={[
+                    <ActionCard action={setPhotoType.bind(this, dispatch, photoChooseType.upload)} title={'Upload photo'}/>,
+                    !isMobile ? <ActionCard action={setPhotoType.bind(this, dispatch, photoChooseType.webcam)} title={'Take photo'}/> : null
+                ]} />
+            )}
+        </PhotoCtx.Consumer>
     );
 };
 
-const WebcamCapturer = ({title}) => {
+const WebcamCapturer = () => {
     let webcamRef = null;
 
     const setWebcamRef = (webcam) => {
@@ -68,30 +76,49 @@ const WebcamCapturer = ({title}) => {
     };
 
     return (
-        <>
-            {title}
-            <PhotoStateDispatchCtx.Consumer>
-                {({photoStateDispatch, photoState}) => (
-                    <>
-                        {photoState ? <img src={photoState} /> :
-                            <>
-                                <Webcam ref={setWebcamRef} screenshotFormat="image/jpeg" />
-                                <Button bsStyle={'primary'} onClick={takePhoto.bind(this, photoStateDispatch)}>Take photo</Button>
-                            </>
-                        }
-                    </>
-                )}
-            </PhotoStateDispatchCtx.Consumer>
-        </>
+        <PhotoCtx.Consumer>
+            {({dispatch, state}) => (
+                <>
+                    {state && state.content ? <img src={state.content} /> :
+                        <>
+                            <Webcam audio={false} ref={setWebcamRef} screenshotFormat="image/jpeg" />
+                            <Button bsStyle={'primary'} onClick={takePhoto.bind(this, dispatch)}>Take photo</Button>
+                        </>
+                    }
+                </>
+            )}
+        </PhotoCtx.Consumer>
     )
 };
 
-const PhotoUploader = ({title}) => {
-    let webcamRef = React.createRef();
-    const photoUploadButton = <input type="file" accept="image/*" ref={webcamRef} onChange={getPhoto}/>;
+const PhotoUploader = () => {
+    const webcamRef = React.createRef();
 
-    return [
-        title,
-        photoUploadButton
-    ]
+    const savePhoto = (dispatch) => {
+        const fr = new FileReader();
+        fr.readAsDataURL(webcamRef.current.files[0]);
+
+        fr.onload = () => {
+            dispatch({
+                type: reducerActions.changePhoto,
+                [reducerActions.newPhoto]: fr.result
+            })
+        };
+    };
+
+    // this is very repeated with the other stuff, merge it all into one somehow?
+    return (
+        <PhotoCtx.Consumer>
+            {({dispatch, state}) => (
+                <>
+                    {state && state.content ? <img src={state.content} /> :
+                        <>
+                            <input type="file" accept="image/*" ref={webcamRef} />
+                            <Button bsStyle={'primary'} onClick={savePhoto.bind(this, dispatch)}>Choose photo</Button>
+                        </>
+                    }
+                </>
+            )}
+        </PhotoCtx.Consumer>
+    )
 };

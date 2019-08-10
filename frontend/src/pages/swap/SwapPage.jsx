@@ -1,38 +1,68 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import {
-    basePhotosState,
-    basePhotoTypeState,
-    PhotoStateDispatchCtx,
-    photoStateReducer,
-    PhotoTypeDispatchCtx,
-    photoTypeReducer
+    PhotoCtx,
+    baseState,
+    photoReducer
 } from "../../common/state";
 import {PhotoChooser} from "../../components/PhotoChoosing";
+import {SectionHolder} from "../../components/Layout";
+import {submitRequest} from "./SwapPage.run";
 
 export const SwapPage = () => {
-    const [photoOneState, photoOneStateDispatch] = React.useReducer(photoStateReducer, basePhotosState);
-    const [photoTwoState, photoTwoStateDispatch] = React.useReducer(photoStateReducer, basePhotosState);
-    const [photoOneType, photoOneTypeDispatch] = React.useReducer(photoTypeReducer, basePhotoTypeState);
-    const [photoTwoType, photoTwoTypeDispatch] = React.useReducer(photoTypeReducer, basePhotoTypeState);
+    const [submissionState, setSubmittedState] = React.useState({
+        submitted: false,
+        result: null,
+        err: null
+    });
+    const [photoOneState, photoOneDispatch] = React.useReducer(photoReducer, baseState);
+    const [photoTwoState, photoTwoDispatch] = React.useReducer(photoReducer, baseState);
 
-    return (
-        //todo: make this iterative instead of copy paste
-        <>
-            <PhotoStateDispatchCtx.Provider value={{photoStateDispatch: photoOneStateDispatch, photoState: photoOneState}}>
-                <PhotoTypeDispatchCtx.Provider value={{photoTypeDispatch: photoOneTypeDispatch, photoType: photoOneType}}>
+    if(submissionState.err) {
+        return <p>error. something like couldn't detect faces in x face. failed to connect etc... same gif format as at work</p>
+    }
+
+    if(submissionState.submitted) {
+        return (
+            <>
+                <p>please wait</p>
+            </>
+        )
+    }
+
+    if(submissionState.result) {
+        return (
+            <>
+                <p>show the image here, and a punny message here</p>
+                <p>show a load of share cards</p>
+            </>
+        )
+    }
+
+    // need what to show on result
+
+    if(!submissionState.submitted) {
+        return (
+            <>
+                <SectionHolder>
+                    <PhotoCtx.Provider value={{dispatch: photoOneDispatch, state: photoOneState}}>
                         <PhotoChooser title={'Choose the first photo'}/>
-                </PhotoTypeDispatchCtx.Provider>
-            </PhotoStateDispatchCtx.Provider>
-            <PhotoStateDispatchCtx.Provider value={{photoStateDispatch: photoTwoStateDispatch, photoState: photoTwoState}}>
-                <PhotoTypeDispatchCtx.Provider value={{photoTypeDispatch: photoTwoTypeDispatch, photoType: photoTwoType}}>
+                    </PhotoCtx.Provider>
+                </SectionHolder>
+                <SectionHolder>
+                    <PhotoCtx.Provider value={{dispatch: photoTwoDispatch, state: photoTwoState}}>
                         <PhotoChooser title={'Choose the second photo'}/>
-                </PhotoTypeDispatchCtx.Provider>
-            </PhotoStateDispatchCtx.Provider>
-            <PhotoStateDispatchCtx.Provider value={{photoOneState, photoTwoState}}>
-                {/*validation two photos supplied - will need consumer */}
-                <Button bsStyle={'primary'}>Go</Button>
-            </PhotoStateDispatchCtx.Provider>
-        </>
-    )
+                    </PhotoCtx.Provider>
+                </SectionHolder>
+                <PhotoCtx.Provider value={{photoOneState, photoTwoState}}>
+                    <PhotoCtx.Consumer>
+                        {({photoOneState, photoTwoState}) =>
+                            <Button bsStyle={'primary'} disabled={!photoOneState.content || !photoTwoState.content}
+                                    onClick={submitRequest.bind(this, photoOneState.content, photoTwoState.content, setSubmittedState)}>Go</Button>
+                        }
+                    </PhotoCtx.Consumer>
+                </PhotoCtx.Provider>
+            </>
+        )
+    }
 };
