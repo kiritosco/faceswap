@@ -1,14 +1,22 @@
-#zeit, deploy to pages
-#need privacy policy
-#babel, nodemon
-#api
-#put on cv
-#make it into an app too
-#upload photo or take one
-#share card
-#global error handler
-#give everything keys and go through console errors and fix
-#figure out how all the context and hook stuff working - https://medium.com/simply/state-management-with-react-hooks-and-context-api-at-10-lines-of-code-baf6be8302c
-#check all objects with keys using either constant key names or typed in each time
-#go through todos and comments
-#eventually include links to Google Play and App Store in header
+branches:
+  only:
+    - master
+
+matrix:
+  include:
+    - language: node_js
+      node_js:
+        - "12"
+      before_script:
+        - cd frontend
+      script:
+        - yarn --silent
+        - yarn run build
+      deploy:
+        - provider: pages
+          skip_cleanup: true
+          github_token: $GITHUB_TOKEN
+          keep_history: true
+          local_dir: frontend/build
+          on:
+            branch: master
