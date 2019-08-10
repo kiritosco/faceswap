@@ -8,7 +8,7 @@ import {SwapPage} from "./pages/swap/SwapPage";
 function Routing() {
     return (
         <>
-            <BrowserRouter>
+            <BrowserRouter basename={'/faceswap'}>
                 <Base>
                     <Route exact path="/" component={HomePage} />
                     <Route exact path="/swap" component={SwapPage} />
