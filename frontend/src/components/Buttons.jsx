@@ -4,10 +4,10 @@ import {Link} from "react-router-dom";
 import Button from "react-bootstrap/es/Button";
 import Card from "react-bootstrap/Card";
 
-export const LinkButton = ({style, link, text}) => {
+export const LinkButton = ({bsStyle, link, text}) => {
     return (
         <Link to={link}>
-            <Button bsStyle={style}>
+            <Button bsStyle={bsStyle}>
                 {text}
             </Button>
         </Link>

@@ -4,7 +4,7 @@ import {getNavSection} from "../../common/helpers";
 import {navSectionIds} from "../../common/consts";
 
 const SwapLinkButton = () => {
-    return <LinkButton style={'primary'} link={getNavSection(navSectionIds.swap).link} text={getNavSection(navSectionIds.swap).name} />
+    return <LinkButton bsStyle={'primary'} link={getNavSection(navSectionIds.swap).link} text={getNavSection(navSectionIds.swap).name} />
 };
 
 export const homeContent = [
