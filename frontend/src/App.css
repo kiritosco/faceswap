@@ -11,7 +11,7 @@ code {
   font-size: 15px;
 }
 
-html, :not(.navbar) > div {
+html, .base {
   background-color: #e9ecef;
 }
 
@@ -19,4 +19,16 @@ html, :not(.navbar) > div {
   background-color: #f7f7f7 !important;
   text-align: center;
   cursor: pointer;
+}
+
+.spinner {
+  /*transform: translate(50%, 50%);*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.spinner > * {
+  padding: 20px;
 }

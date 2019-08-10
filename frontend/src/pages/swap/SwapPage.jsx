@@ -8,6 +8,7 @@ import {
 import {PhotoChooser} from "../../components/PhotoChoosing";
 import {SectionHolder} from "../../components/Layout";
 import {submitRequest} from "./SwapPage.run";
+import {PongSpinner} from "react-spinners-kit";
 
 export const SwapPage = () => {
     const [submissionState, setSubmittedState] = React.useState({
@@ -24,16 +25,17 @@ export const SwapPage = () => {
 
     if(submissionState.submitted) {
         return (
-            <>
-                <p>please wait</p>
-            </>
+            <div className={'spinner'}>
+                <h3>Swapping your faces</h3>
+                <PongSpinner size={100}/>
+            </div>
         )
     }
 
     if(submissionState.result) {
         return (
             <>
-                <p>show the image here, and a punny message here</p>
+                <p>show the image here, and a punny message here (maybe have an array of them and it chooses a random number)</p>
                 <p>show a load of share cards</p>
             </>
         )
