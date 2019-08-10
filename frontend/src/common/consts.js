@@ -25,3 +25,17 @@ export const photoChooseType = {
     webcam: 'webcam',
     upload: 'upload'
 };
+
+export const reducerActions = {
+    changePhotoOne: 'photoOne',
+    newPhotoOne: 'newPhotoOne',
+    changePhotoTwo: 'photoTwo',
+    newPhotoTwo: 'newPhotoTwo',
+    changePhotoType: 'photoType',
+    newPhotoType: 'newPhotoType',
+};
+
+export const contextKeys = {
+    photoOne: 'photoOne',
+    photoTwo: 'photoTwo'
+};

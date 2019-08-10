@@ -2,16 +2,16 @@ import React from 'react';
 import './App.css';
 import {BrowserRouter, Route} from "react-router-dom";
 import {Base} from "./components/Layout";
-import {Home} from "./pages/home/Home";
-import {Swap} from "./pages/swap/Swap";
+import {HomePage} from "./pages/home/HomePage";
+import {SwapPage} from "./pages/swap/SwapPage";
 
 function Routing() {
     return (
         <>
             <BrowserRouter>
                 <Base>
-                    <Route exact path="/" component={Home} />
-                    <Route exact path="/swap" component={Swap} />
+                    <Route exact path="/" component={HomePage} />
+                    <Route exact path="/swap" component={SwapPage} />
                 </Base>
             </BrowserRouter>
         </>

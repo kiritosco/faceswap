@@ -3,7 +3,7 @@ import {homeContent} from "./content";
 import {SectionHolder} from "../../components/Layout";
 import FadeIn from "react-fade-in";
 
-export const Home = () => {
+export const HomePage = () => {
     const content = homeContent.map(item => {
         return (
             <FadeIn>
