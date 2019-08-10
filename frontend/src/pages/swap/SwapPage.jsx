@@ -17,7 +17,7 @@ export const SwapPage = () => {
     const [photoTwoType, photoTwoTypeDispatch] = React.useReducer(photoTypeReducer, basePhotoTypeState);
 
     return (
-        //make this iterative instead of copy paste
+        //todo: make this iterative instead of copy paste
         <>
             <PhotoStateDispatchCtx.Provider value={{photoStateDispatch: photoOneStateDispatch, photoState: photoOneState}}>
                 <PhotoTypeDispatchCtx.Provider value={{photoTypeDispatch: photoOneTypeDispatch, photoType: photoOneType}}>
