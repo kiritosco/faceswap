@@ -20,7 +20,7 @@ class Logger {
     };
 
     debug = (msg) => {
-        console.log(`\x1b[35m[${this.getMomentDate()} ${this.MACHINE_INFO}] \x1b[34m[DEBUG]:\x1b[0m ${msg}`)
+        isDev ? console.log(`\x1b[35m[${this.getMomentDate()} ${this.MACHINE_INFO}] \x1b[34m[DEBUG]:\x1b[0m ${msg}`) : null
     }
 }
 
