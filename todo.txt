@@ -2,8 +2,13 @@
 #need privacy policy
 #babel, nodemon
 #api
+    # base64 to image
+    # save as tempfile
+    # find the face in photo 1 and 2
+    # paste face photo 2 over face photo 1
+    # send base64/png file
 #put on cv
-#make it into an app too
+#make it into an app too - react native or kotlin/java and Swift? could use catalyst but need to support ipad
 #upload photo or take one
 #share card
 #global error handler
@@ -12,3 +17,11 @@
 #check all objects with keys using either constant key names or typed in each time
 #go through todos and comments
 #eventually include links to Google Play and App Store in header
+#dockerise
+----------------------
+api:
+    licence
+    dockerfile
+    eslint airbnb
+    prettier
+    swagger

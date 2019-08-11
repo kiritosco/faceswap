@@ -1,0 +1,35 @@
+{
+  "name": "faceswap-api",
+  "author": "Josh Spindler",
+  "version": "1.0.0",
+  "description": "API which powers faceswap",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=production node dist/index.js",
+    "dev": "NODE_ENV=development nodemon server --exec babel-node",
+    "build": "babel server --out-dir dist --delete-dir-on-start --source-maps inline --copy-files",
+    "lint": "eslint -c .eslintrc.json server/**",
+    "lint:fix": "eslint --fix -c .eslintrc.json server**"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
+    "express": "^4.17.1",
+    "moment": "^2.24.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/node": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "babel-eslint": "^10.0.2",
+    "eslint": "^6.1.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "nodemon": "^1.19.1",
+    "prettier": "^1.18.2"
+  }
+}

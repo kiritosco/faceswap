@@ -20,3 +20,6 @@ matrix:
           local_dir: web/build
           on:
             branch: master
+
+            #dockerise website and api
+            #now sh for api - fail on eslint
