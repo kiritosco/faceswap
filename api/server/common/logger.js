@@ -15,12 +15,16 @@ class Logger {
         console.log(`\x1b[35m[${this.getMomentDate()} ${this.MACHINE_INFO}]\x1b[34m[INFO]:\x1b[0m ${msg}`)
     };
 
+    warn = (msg) => {
+        console.log(`\x1b[35m[${this.getMomentDate()} ${this.MACHINE_INFO}]\x1b[33m[WARN]:\x1b[0m ${msg}`)
+    };
+
     error = (msg) => {
-        console.error(`\x1b[35m[${this.getMomentDate()} ${this.MACHINE_INFO}] \x1b[34m[ERR]:\x1b[0m ${msg}`)
+        console.error(`\x1b[35m[${this.getMomentDate()} ${this.MACHINE_INFO}] \x1b[31m[ERR]:\x1b[0m ${msg}`)
     };
 
     debug = (msg) => {
-        isDev ? console.log(`\x1b[35m[${this.getMomentDate()} ${this.MACHINE_INFO}] \x1b[34m[DEBUG]:\x1b[0m ${msg}`) : null
+        isDev ? console.log(`\x1b[35m[${this.getMomentDate()} ${this.MACHINE_INFO}] \x1b[37m[DEBUG]:\x1b[0m ${msg}`) : null
     }
 }
 

@@ -18,6 +18,8 @@
 #go through todos and comments
 #eventually include links to Google Play and App Store in header
 #dockerise
+#fix react errors
+#test no photos, missing photos, no faces etc...
 ----------------------
 api:
     licence
