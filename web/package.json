@@ -1,6 +1,8 @@
 {
   "name": "faceswap-web",
-  "version": "0.1.0",
+  "author": "Josh Spindler",
+  "license": "MIT",
+  "version": "1.0.0",
   "private": true,
   "homepage": "https://joshsp98.github.io/faceswap",
   "dependencies": {

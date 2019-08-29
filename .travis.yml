@@ -10,16 +10,17 @@ matrix:
       before_script:
         - cd web
       script:
+        #dockerise it instead of this
         - yarn --silent
         - yarn run build
-      deploy:
-        - provider: pages
-          skip_cleanup: true
-          github_token: $GITHUB_TOKEN
-          keep_history: true
-          local_dir: web/build
-          on:
-            branch: master
+    - language: node_js
+      services:
+        - docker
+      before_script:
+        - cd api
+      script:
+        - docker build .
 
             #dockerise website and api
+            #send docker containers somewhere
             #now sh for api - fail on eslint
