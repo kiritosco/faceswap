@@ -23,21 +23,21 @@ export const SwapPage = () => {
         return <p>error. something like couldn't detect faces in x face. failed to connect etc... same gif format as at work</p>
     }
 
-    if(submissionState.submitted) {
-        return (
-            <div className={'spinner'}>
-                <h3>Swapping your faces</h3>
-                <PongSpinner size={100}/>
-            </div>
-        )
-    }
-
     if(submissionState.result) {
         return (
             <>
                 <p>show the image here, and a punny message here (maybe have an array of them and it chooses a random number)</p>
                 <p>show a load of share cards</p>
             </>
+        )
+    }
+
+    if(submissionState.submitted) {
+        return (
+            <div className={'spinner'}>
+                <h3>Swapping your faces</h3>
+                <PongSpinner size={100}/>
+            </div>
         )
     }
 

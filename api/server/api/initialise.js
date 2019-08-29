@@ -14,10 +14,16 @@ export default function initialiseServer() {
     app.use(morgan(isDev ? 'dev' : null));
     app.use(bodyParser.json({limit: '50mb'}));
     app.use((req, _, next) => {
-        logger.info(`request received at ${req.url}`);
+        logger.info(`${req.method} request received at ${req.url}`);
         next();
     });
-    app.use(generateRoutes);
+    app.use((_, res, next) => {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Methods', 'POST');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Accept');
+        next()
+    });
+    app.use('/v1', generateRoutes);
 
     process.on('uncaughtException', (err) => {
         logger.error(`uncaught exception: ${err}`);

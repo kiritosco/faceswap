@@ -1,2 +1,2 @@
-[![Build Status](https://travis-ci.com/joshsp98/faceswap.svg?branch=master)](https://travis-ci.com/joshsp98/faceswap)
 # faceswap - in progress!
+# what it is, go into other folders for more info etc...
