@@ -1,6 +1,6 @@
 import cv from "opencv4nodejs";
 import Jimp from "jimp";
-import {errorMessages} from "../common/consts";
+import {errorMessages, photoDimensions} from "../common/consts";
 
 export const swapFaces = (photoOneBuffer, photoTwoBuffer) => {
     return new Promise(async (resolve, reject) => {
@@ -24,9 +24,9 @@ export const swapFaces = (photoOneBuffer, photoTwoBuffer) => {
 const mergePhotos = async (photoOneBuffer, imageTwoFaceBuffer, imageOneFaceRect) => {
     return new Promise(async (resolve) => {
         const {jimpPhotoOne, jimpPhotoTwo} = await getJimpPhotos(photoOneBuffer, imageTwoFaceBuffer);
-        // try blit
         const mergedPhoto = jimpPhotoOne.composite(jimpPhotoTwo, imageOneFaceRect.x, imageOneFaceRect.y);
-        resolve(mergedPhoto)
+        const resizedMerge = mergedPhoto.resize(photoDimensions.width, photoDimensions.height);
+        resolve(resizedMerge)
     })
 };
 

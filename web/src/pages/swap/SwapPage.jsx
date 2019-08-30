@@ -26,8 +26,12 @@ export const SwapPage = () => {
     if(submissionState.result) {
         return (
             <>
-                <p>show the image here, and a punny message here (maybe have an array of them and it chooses a random number)</p>
-                <p>show a load of share cards</p>
+                <SectionHolder>
+                    <h2>Your swap is complete, and you&apos;ve never looked more beautiful!</h2>
+                </SectionHolder>
+                <SectionHolder>
+                    <img alt={'result'} src={submissionState.result} />
+                </SectionHolder>
             </>
         )
     }
@@ -40,8 +44,6 @@ export const SwapPage = () => {
             </div>
         )
     }
-
-    // need what to show on result
 
     if(!submissionState.submitted) {
         return (
