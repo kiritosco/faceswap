@@ -8,8 +8,8 @@ import {Link} from "react-router-dom";
 
 export const Header = () => {
     const Links = () => {
-        return navSections.map(section => {
-            return <Link className='nav-link' to={section.link}>{section.name}</Link>
+        return navSections.map((section, idx) => {
+            return <Link key={`link-${idx}`} className='nav-link' to={section.link}>{section.name}</Link>
         });
     };
 

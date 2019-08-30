@@ -106,7 +106,6 @@ const PhotoUploader = () => {
         };
     };
 
-    // this is very repeated with the other stuff, merge it all into one somehow?
     return (
         <PhotoCtx.Consumer>
             {({dispatch, state}) => (

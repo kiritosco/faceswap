@@ -25,9 +25,9 @@ export const SectionHolder = (props) => {
 
 export const SplitColLayout = (props) => {
     const mdSize = Math.floor(12 / props.items.length);
-    const columns = props.items.map(item => {
+    const columns = props.items.map((item, idx) => {
         return (
-            <Col md={mdSize} style={{borderRight: props.showBorder ? '1px solid black' : null}}>
+            <Col key={`${idx}-splitcol`} md={mdSize} style={{borderRight: props.showBorder ? '1px solid black' : null}}>
                 {item}
             </Col>
         )

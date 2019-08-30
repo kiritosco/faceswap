@@ -4,9 +4,9 @@ import {SectionHolder} from "../../components/Layout";
 import FadeIn from "react-fade-in";
 
 export const HomePage = () => {
-    const content = homeContent.map(item => {
+    const content = homeContent.map((item, idx) => {
         return (
-            <FadeIn>
+            <FadeIn key={`home-${idx}-fade`}>
                 <SectionHolder>
                     {item}
                 </SectionHolder>
