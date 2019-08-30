@@ -1,11 +1,13 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import logger from '../common/logger';
+import swaggerUi from 'swagger-ui-express';
+import yaml from 'yamljs'
 import morgan from 'morgan';
-import {isDev} from "../environment";
+import logger from '../common/logger';
+import {isDev} from "../common/environment";
 import generateRoutes from "./routes/v1/generate-routes";
+import path from "path";
 
-// need swagger
 export default function initialiseServer() {
     const app = express();
     const port = process.env.APP_PORT || 3000;
@@ -15,6 +17,7 @@ export default function initialiseServer() {
     app.use(logRequest);
     app.use(setHeaders);
     app.use('/v1', generateRoutes);
+    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(yaml.load(path.join(__dirname, '..', 'swagger.yaml'))));
 
     process.on('uncaughtException', logException);
 

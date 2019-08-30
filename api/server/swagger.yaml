@@ -1,0 +1,49 @@
+swagger: "2.0"
+info:
+  title: faceswap API
+  description: Description for the API which powers faceswap
+  version: 1.0.0
+host: <HOSTNAME:PORT>
+basePath: /v1
+paths:
+  /swap:
+    post:
+      summary: Performs a face swap
+      produces:
+        - application/json
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Photo object containing the photos to be swapped"
+          required: false
+          schema:
+            $ref: "#/definitions/Swap"
+      responses:
+        200:
+          description: A successful face swap
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                description: the response code
+                example: 200
+              msg:
+                type: string
+                description: the encoded face swap
+                example: data:image/jpeg;base64,/9j/4AAQSkZJRgA...
+definitions:
+  Swap:
+    description: A JSON object containing two base64 encoded photos
+    required:
+      - photoOne
+      - photoTwo
+    properties:
+      photoOne:
+        type: string
+        description: base64 encoded photo whose face will be replaced
+        example: data:image/jpeg;base64,/9j/4AAQSkZJRgA
+      photoTwo:
+        type: string
+        description: base64 encoded photo of the face to put on photo one
+        example: data:image/jpeg;base64,/9j/4AAQSkZJRgA

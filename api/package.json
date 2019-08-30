@@ -20,7 +20,9 @@
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "morgan": "^1.9.1",
-    "opencv4nodejs": "^5.2.0"
+    "opencv4nodejs": "^5.2.0",
+    "swagger-ui-express": "^4.0.7",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
