@@ -1,23 +1,13 @@
 #zeit, deploy to pages
 #need privacy policy
-#babel, nodemon
-#api
-    # base64 to image
-    # save as tempfile
-    # find the face in photo 1 and 2
-    # paste face photo 2 over face photo 1
-    # send base64/png file
 #put on cv
 #make it into an app too - react native or kotlin/java and Swift? could use catalyst but need to support ipad
-#upload photo or take one
-#share card
 #global error handler
 #give everything keys and go through console errors and fix
 #figure out how all the context and hook stuff working - https://medium.com/simply/state-management-with-react-hooks-and-context-api-at-10-lines-of-code-baf6be8302c
 #check all objects with keys using either constant key names or typed in each time
 #go through todos and comments
 #eventually include links to Google Play and App Store in header
-#dockerise
 #fix react errors
 #test no photos, missing photos, no faces etc...
 ----------------------
