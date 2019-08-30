@@ -5,7 +5,7 @@ import morgan from 'morgan';
 import {isDev} from "../environment";
 import generateRoutes from "./routes/v1/generate-routes";
 
-// need swagger
+// need redis, swagger
 export default function initialiseServer() {
     const app = express();
     const port = process.env.APP_PORT || 3000;
