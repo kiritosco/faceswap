@@ -20,7 +20,7 @@ export const SwapPage = () => {
     const [photoTwoState, photoTwoDispatch] = React.useReducer(photoReducer, baseState);
 
     if(submissionState.err) {
-        return <p>error. something like couldn't detect faces in x face. failed to connect etc... same gif format as at work</p>
+        return <p>An error occured {submissionState.err}</p>
     }
 
     if(submissionState.result) {
