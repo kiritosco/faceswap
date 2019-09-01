@@ -20,7 +20,7 @@ export const SwapPage = () => {
     const [photoTwoState, photoTwoDispatch] = React.useReducer(photoReducer, baseState);
 
     if(submissionState.err) {
-        return <p>An error occured {submissionState.err}</p>
+        return <p>An error occurred {submissionState.err}</p>
     }
 
     if(submissionState.result) {
